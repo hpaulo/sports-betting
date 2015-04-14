@@ -5,9 +5,9 @@
 ##' Import csv datafiles
 source('options.R')
 
-ncaaHist2013 <- read.csv("data/2013-ncaa-mens.csv") %>% tbl_df()
-ncaaHist2014 <- read.csv("data/2014-ncaa-mens.csv") %>% tbl_df()
-ncaaHist2015 <- read.csv("data/2015-ncaa-mens.csv") %>% tbl_df()
+ncaaHist2013 <- read.csv("../data/2013-ncaa-mens.csv") %>% tbl_df()
+ncaaHist2014 <- read.csv("../data/2014-ncaa-mens.csv") %>% tbl_df()
+ncaaHist2015 <- read.csv("../data/2015-ncaa-mens.csv") %>% tbl_df()
 
 ##' Check datasets
 ncaaHist2013
@@ -26,4 +26,4 @@ names(ncaaHist2015)
 df <- rbind(ncaaHist2013, ncaaHist2014, ncaaHist2015)
 
 ##' Output the cleaned data into a single RData file.
-save(df, file = 'data/cleanedData.RData')
+save(df, file = '../data/generated/cleanedData.RData')
