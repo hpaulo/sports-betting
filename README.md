@@ -18,7 +18,7 @@ We run some R manipulation on the trimmed data sets, which includes joining each
 
 ```
 $ head -1 TeamStats.csv
-"","Team","Team.Score","Opponent.Score","Team.Score.Mean","Opponent.Score.Mean","Team.Score.Var","Opponent.Score.Var","Loss","Win","WinRatio"
+"","Team","Team.Score","Opponent.Score","Team.Score.Mean","Opponent.Score.Mean","Team.Score.Var","Opponent.Score.Var","Loss","Win","WinRatio","Matches"
 $ head -1 MatchupStats.csv
 "","Team","Opponent","Loss","Win","WinRatio","Matches"
 ```

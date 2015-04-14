@@ -27,15 +27,25 @@ teamPointsVar <- setNames(aggregate(formula=cbind(Team.Score, Opponent.Score) ~ 
 ##' Merge mean and variance into point stats
 teamPoints <- merge(teamPoints, teamPointsMean, by="Team")
 teamPoints <- merge(teamPoints, teamPointsVar, by="Team")
+teamPoints[is.na(teamPoints)] <- 0 #get rid of NAs
 
 ##' Win and loss stats
 teamResults <- tally(group_by(df, Team, Team.Result))
 teamResults <- spread(data=teamResults, key=Team.Result, value=n) #'longify' the tally
+teamResults[is.na(teamResults)] <- 0 #get rid of NAs
 teamResults$WinRatio <- teamResults$Win / (teamResults$Win + teamResults$Loss)
+##' Count total matches for each team
+teamResults$Matches <- teamResults$Win + teamResults$Loss
 
 ##' Merge all team stats and save
-allTeamStats <- merge(teamPoints, teamResults, by="Team")
-write.csv(allTeamStats, file = '../data/generated/TeamStats.csv')
+teamStats <- merge(teamPoints, teamResults, by="Team")
+write.csv(teamStats, file = '../data/generated/TeamStats.csv')
+
+##' Filter out teams with below average number of matches
+avgMatches <- mean(teamStats$Matches)
+teamStats <- teamStats[teamStats$Matches > avgMatches,]
+##' Take a look at the best teams
+head(teamStats[order(-teamStats$WinRatio),],10)
 
 ##'
 ##' Matchup Statistics
