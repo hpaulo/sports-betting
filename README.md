@@ -31,7 +31,7 @@ Parse the matchup data sets using the Matlab function parseMatchupStats:
 [matchup, stats] = parseMatchupStats('../data/generated/MatchupStats.csv');
 ```
 
-Create a betting pool for and against a team for a given matchup by using generateBettingPool. It is a naive betting pool which bets almost entirely for the expected winner based on past matchups of the two teams, but there is a small percent of bets that are completely random.
+Create a betting pool for and against a team for a given matchup by using generateBettingPool. It is a naive betting pool which bets almost entirely (proportionally) for the expected winner based on past matchups of the two teams, but there is a small percent of bets that are spread evenly over the two teams.
 
 ```
 [teamPool opponentPool] = generateBettingPool(stats(2,:), 100)
