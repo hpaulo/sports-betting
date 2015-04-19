@@ -1,9 +1,13 @@
 function [matchups, stats] = parseMatchupStats(filename)
-    % Summary:  Function for parsing NCAA matchup statistics sets and returning
-    %           arrays containing the data.
-    % 
-    % matchups: Team names (team, opponent)
-    % stats:    Statistics (losses, wins, win probability, num matches)
+% Summary:  Function for parsing NCAA matchup statistics sets and returning
+%           arrays containing the data.
+% 
+% @params
+% filename: The name of the file to parse
+%
+% @returns
+% matchups: Team names (team, opponent)
+% stats:    Statistics (losses, wins, win probability, num matches)
     
     f = fopen(filename); % Open for read
     
