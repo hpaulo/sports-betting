@@ -33,7 +33,7 @@ teamPoints[is.na(teamPoints)] <- 0 #get rid of NAs
 teamResults <- tally(group_by(df, Team, Team.Result))
 teamResults <- spread(data=teamResults, key=Team.Result, value=n) #'longify' the tally
 teamResults[is.na(teamResults)] <- 0 #get rid of NAs
-teamResults$WinRatio <- teamResults$Win / (teamResults$Win + teamResults$Loss)
+teamResults$WinProb <- teamResults$Win / (teamResults$Win + teamResults$Loss)
 ##' Count total matches for each team
 teamResults$Matches <- teamResults$Win + teamResults$Loss
 
@@ -45,7 +45,7 @@ write.csv(teamStats, file = '../data/generated/TeamStats.csv')
 avgMatches <- mean(teamStats$Matches)
 teamStats <- teamStats[teamStats$Matches > avgMatches,]
 ##' Take a look at the best teams
-head(teamStats[order(-teamStats$WinRatio),],10)
+head(teamStats[order(-teamStats$WinProb),],10)
 
 ##'
 ##' Matchup Statistics
@@ -56,7 +56,7 @@ head(teamStats[order(-teamStats$WinRatio),],10)
 matchupResults <- tally(group_by(df, Team, Opponent, Team.Result))
 matchupResults <- spread(data=matchupResults, key=Team.Result, value=n) #'longify' the tally
 matchupResults[is.na(matchupResults)] <- 0 #get rid of NAs
-matchupResults$WinRatio <- matchupResults$Win / (matchupResults$Win + matchupResults$Loss)
+matchupResults$WinProb <- matchupResults$Win / (matchupResults$Win + matchupResults$Loss)
 ##' Count total matches per team matchup
 matchupResults$Matches <- matchupResults$Win + matchupResults$Loss
 

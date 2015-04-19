@@ -14,11 +14,11 @@ Date,Team,Opponent,Team Score,Opponent Score,Team Result
 
 ## Team and Matchup Statistics
 
-We run some R manipulation on the trimmed data sets, which includes joining each season's results and calculating statistics for each team and for each team matchup. Included in the team statistics are total wins and losses, win ratio, total points, and team and opponent point distributions. Included in the matchup statistics are wins, losses, win ratio, and total matches with respect to one of the two teams.
+We run some R manipulation on the trimmed data sets, which includes joining each season's results and calculating statistics for each team and for each team matchup. Included in the team statistics are total wins and losses, win probability, total points, and team and opponent point distributions. Included in the matchup statistics are wins, losses, win probability, and total matches with respect to one of the two teams.
 
 ```
 $ head -1 TeamStats.csv
-"","Team","Team.Score","Opponent.Score","Team.Score.Mean","Opponent.Score.Mean","Team.Score.Var","Opponent.Score.Var","Loss","Win","WinRatio","Matches"
+"","Team","Team.Score","Opponent.Score","Team.Score.Mean","Opponent.Score.Mean","Team.Score.Var","Opponent.Score.Var","Loss","Win","WinProb","Matches"
 $ head -1 MatchupStats.csv
-"","Team","Opponent","Loss","Win","WinRatio","Matches"
+"","Team","Opponent","Loss","Win","WinProb","Matches"
 ```

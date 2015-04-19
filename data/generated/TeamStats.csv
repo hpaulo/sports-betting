@@ -1,4 +1,4 @@
-"","Team","Team.Score","Opponent.Score","Team.Score.Mean","Opponent.Score.Mean","Team.Score.Var","Opponent.Score.Var","Loss","Win","WinRatio","Matches"
+"","Team","Team.Score","Opponent.Score","Team.Score.Mean","Opponent.Score.Mean","Team.Score.Var","Opponent.Score.Var","Loss","Win","WinProb","Matches"
 "1","Abilene Chr",4190,4414,67.5806451612903,71.1935483870968,361.755684822845,174.027498677948,41,21,0.338709677419355,62
 "2","Adams St",113,147,56.5,73.5,112.5,40.5,2,0,0,2
 "3","Air Force",5891,5935,66.9431818181818,67.4431818181818,150.467998955068,162.73236677116,47,41,0.465909090909091,88
