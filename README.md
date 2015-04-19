@@ -22,3 +22,11 @@ $ head -1 TeamStats.csv
 $ head -1 MatchupStats.csv
 "","Team","Opponent","Loss","Win","WinProb","Matches"
 ```
+
+## Using the Data
+
+Parse the matchup data sets using the Matlab function parseMatchupStats:
+
+```
+[matchup, stats] = parseMatchupStats('../data/generated/MatchupStats.csv');
+```
