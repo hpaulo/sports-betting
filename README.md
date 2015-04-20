@@ -28,7 +28,7 @@ $ head -1 MatchupStats.csv
 Parse the matchup data sets using the Matlab function parseMatchupStats:
 
 ```
-[matchup, stats] = parseMatchupStats('../data/generated/MatchupStats.csv');
+[matchup stats] = parseMatchupStats('../data/generated/MatchupStats.csv');
 ```
 
 Create a betting pool for and against a team for a given matchup by using generateBettingPool. It is a naive betting pool which bets almost entirely (proportionally) for the expected winner based on past matchups of the two teams, but there is a small percent of bets that are spread evenly over the two teams.
@@ -41,4 +41,10 @@ Parse the team statistics which include, among other things, the point distribut
 
 ```
 [teams stats] = parseTeamStats('../data/generated/TeamStats.csv');
+```
+
+Calculate the expected values and variances of winning probabilities for a matchup of two teams using the parsed data from TeamStats.csv. In the deterministic case, the probabilities of each team winning is either 0 or 1. In the stochastic case, the expected value of the probability of a win is simply the probability of one team scoring more points than another team.
+
+```
+[expectation variance] = calcMatchupProbs(stats(2,:),stats(7,:));
 ```

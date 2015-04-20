@@ -6,11 +6,11 @@ function [teams, stats] = parseTeamStats(filename)
 % filename: The name of the file to parse
 %
 % @returns
-% matchups: Team names (team)
-% stats:    Statistics (total score, total opponent score,
-%                       mean score, mean opponent score,
-%                       score variance, opponent score variance, 
-%                       losses, wins, win probability, num matches)
+% teams:  Team names (team)
+% stats:  Statistics (total score, total opponent score,
+%                     mean score, mean opponent score,
+%                     score variance, opponent score variance, 
+%                     losses, wins, win probability, num matches)
     
     f = fopen(filename); % Open for read
     
