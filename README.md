@@ -36,3 +36,9 @@ Create a betting pool for and against a team for a given matchup by using genera
 ```
 [teamPool opponentPool] = generateBettingPool(stats(2,:), 100)
 ```
+
+Parse the team statistics which include, among other things, the point distributions for each team as well as their overall win probabilities based on wins over total matches played by the team.
+
+```
+[teams stats] = parseTeamStats('../data/generated/TeamStats.csv');
+```
