@@ -48,3 +48,8 @@ Calculate the expected values and variances of winning probabilities for a match
 ```
 [expectation variance] = calcMatchupProbs(stats(2,:),stats(7,:));
 ```
+Simulate a matchup between two teams. The number of points each team scores is pulled randomly from their distribution of points in the past. The team with the most points is declared the winner, except for ties, in which case the second team (opponent) wins. This is useful for Monte Carlo simulations for validating our model.
+
+```
+winProbs = simulateMatchup(stats(2,:),stats(7,:))
+```
