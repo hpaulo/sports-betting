@@ -78,18 +78,17 @@ x0 = [10;1;10;1;10;1;10;1;10;1;10;1];
 
 %just randomly picking a team out of each pairing
 TeamPick = randi([1 2],1,6);
-%theta is picked arbitrarily, may need to ask apurva
-theta = 1;
+
 %fmincon using deterministic model
 deterministic = true;
 chanceconstrained = false;
 [x, fval] = fmincon(@(x) objectiveFunc(x,winProbs,expectations,variances,...
-    bettingPools,TeamPick,theta,deterministic,chanceconstrained),...
+    bettingPools,TeamPick,deterministic,chanceconstrained),...
     x0, [],[],[],[],[],[],@(x) constraintFunc(x,budget)) 
 
-%fmincon using chance-constrained model/Markovitz
+%fmincon using chance-constrained model
 chanceconstrained = true;
 deterministic = false;
 [x, fval] = fmincon(@(x) objectiveFunc(x,winProbs,expectations,variances,...
-    bettingPools,TeamPick,theta,deterministic,chanceconstrained),...
+    bettingPools,TeamPick,deterministic,chanceconstrained),...
     x0, [],[],[],[],[],[],@(x) constraintFunc(x,budget)) 

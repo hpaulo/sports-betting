@@ -6,7 +6,8 @@ close all; clear all;clc
 % x0 = [10;10;10];
 x0 = [10;1;10;1;10;1];
 
+%simulated probability
 R = rand(1,3);
 
 
-[x, fval] = fmincon(@objfun, x0, [],[],[],[],[],[],@confun) 
+[x, fval] = fmincon(@(x) objectiveFunc(x,R), x0, [],[],[],[],[],[],@(x) constraintFunc(x,R)) 
