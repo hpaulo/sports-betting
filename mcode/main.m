@@ -3,11 +3,11 @@
 %          Logan Money
 %          Tom Terlecki
 % Date:    2015/4/20
-close all; clc; clear all;
-
+%close all; clc; clear all;
+clearvars -except teams teamStats matchups matchupStats
 %% Load NCAA statistical data
-[teams, teamStats] = parseTeamStats('../data/generated/TeamStats.csv');
-[matchups, matchupStats] = parseMatchupStats('../data/generated/MatchupStats.csv');
+%[teams, teamStats] = parseTeamStats('../data/generated/TeamStats.csv');
+%[matchups, matchupStats] = parseMatchupStats('../data/generated/MatchupStats.csv');
 
 %% Define parameters
 % Input variables and constraints
@@ -59,6 +59,9 @@ end
 %% Optimization
 % INSTRUCTIONS
 % ============
+
+
+
 % Use the betting pool for match t and team i (1 or 2)
 %bettingPools(t,i)
 
