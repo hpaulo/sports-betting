@@ -15,7 +15,7 @@ function [teams, stats] = parseTeamStats(filename)
     f = fopen(filename); % Open for read
     
     % Column names
-    colNames = strrep(strsplit(strtrim(fgets(f)), ','), '"', '')
+    colNames = strrep(strsplit(strtrim(fgets(f)), ','), '"', '');
     if length(colNames) ~= 12
         error('File not correct format')
     end
@@ -29,14 +29,9 @@ function [teams, stats] = parseTeamStats(filename)
     fclose(f); % Close up the file
     
     % Team names
-    disp('teams: [team name]')
     teams = data(:,2);
     
     % Statistics corresponding to teams
-    disp(['stats: [tot score, tot opp. score,',    ...
-                 'mean score, mean opp. score, ', ...
-                 'score var., opp. score var., ', ...
-                 'losses, wins, win probability, num matches]']);
     stats = str2double(data(:,3:12));
     
     return;

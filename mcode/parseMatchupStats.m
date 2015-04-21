@@ -12,7 +12,7 @@ function [matchups, stats] = parseMatchupStats(filename)
     f = fopen(filename); % Open for read
     
     % Column names
-    colNames = strrep(strsplit(strtrim(fgets(f)), ','), '"', '')
+    colNames = strrep(strsplit(strtrim(fgets(f)), ','), '"', '');
     if length(colNames) ~= 7
         error('File not correct format')
     end
@@ -26,11 +26,9 @@ function [matchups, stats] = parseMatchupStats(filename)
     fclose(f); % Close up the file
     
     % Team names in matchups
-    disp('matchups: [team, opponent]')
     matchups = data(:,2:3);
     
     % Statistics corresponding to teams
-    disp('stats: [losses, wins, win probability, num matches]')
     stats = str2double(data(:,4:7));
     
     return;
