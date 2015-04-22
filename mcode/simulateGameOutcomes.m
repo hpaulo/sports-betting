@@ -1,0 +1,6 @@
+% Simulate the match's outcome
+for i = 1:numMatches
+    winProbs(i,:) = simulateMatchup( ...
+                        teamStats(teamIndices(i), :), ...
+                        teamStats(teamIndices(numMatches + i), :));
+end
