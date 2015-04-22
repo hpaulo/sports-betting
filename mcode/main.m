@@ -73,41 +73,31 @@ end
 OFmean = mean(OFout);
 OFvar = var(OFout);
 
-%% Optimization
-% INSTRUCTIONS
-% ============
 
-% Use the betting pool for match t and team i (1 or 2)
-%bettingPools(t,i)
+%%
+x0 = [0;0;0;0;0;0;0;0;0;0;0;0];
 
-% Use the expected value of the probability of winning
-% for match t and team i (1 or 2)
-%expectations(t,i)
 
-% Use the variance of the probability of winning for match t
-% and team i (1 or 2)
-%variances(t,i)
 
-% Verify the outcome (for testing only now) for match t, team i (1 or 2)
-%winProbs(t,i)
+%theta is picked arbitrarily, may need to ask apurva
+theta = [3,2,1,0.1,0.01];%5 elements
+%fmincon using deterministic model
+deterministic = true;
+markovitz = false;
+[x, fval] = fmincon(@(x) objectiveFunc(x,winProbs,expectations,variances,...
+    bettingPools,theta,deterministic,markovitz,numMatches),...
+    x0, [],[],[],[],[],[],@(x) constraintFunc(x,budget)) 
 
-% x0 = [10;1;10;1;10;1;10;1;10;1;10;1];
-% % R = rand(1,3);
-% 
-% %just randomly picking a team out of each pairing
-% TeamPick = randi([1 2],1,6);
-% %theta is picked arbitrarily, may need to ask apurva
-% theta = 1;
-% %fmincon using deterministic model
-% deterministic = true;
-% chanceconstrained = false;
-% [x, fval] = fmincon(@(x) objectiveFunc(x,winProbs,expectations,variances,...
-%     bettingPools,TeamPick,theta,deterministic,chanceconstrained),...
-%     x0, [],[],[],[],[],[],@(x) constraintFunc(x,budget)) 
-% 
-% %fmincon using chance-constrained model/Markovitz
-% chanceconstrained = true;
-% deterministic = false;
-% [x, fval] = fmincon(@(x) objectiveFunc(x,winProbs,expectations,variances,...
-%     bettingPools,TeamPick,theta,deterministic,chanceconstrained),...
-%     x0, [],[],[],[],[],[],@(x) constraintFunc(x,budget)) 
+%fmincon using chance-constrained model/Markovitz
+    markovitz = true;
+    deterministic = false;
+
+for i = 1:length(theta)  
+    [x, fval] = fmincon(@(x) objectiveFunc(x,winProbs,expectations,variances,...
+        bettingPools,theta(i),deterministic,markovitz,numMatches),...
+        x0, [],[],[],[],[],[],@(x) constraintFunc(x,budget))
+    fval = -fval
+    fvalmark(i) = fval;
+    theta(i)
+end
+
