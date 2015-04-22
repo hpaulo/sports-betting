@@ -73,23 +73,29 @@ end
 % Verify the outcome (for testing only now) for match t, team i (1 or 2)
 %winProbs(t,i)
 
-x0 = [10;1;10;1;10;1;10;1;10;1;10;1];
-% R = rand(1,3);
+% x0 = [1;1;1;1];
+x0 = [0;0;0;0;0;0;0;0;0;0;0;0];
 
-%just randomly picking a team out of each pairing
-TeamPick = randi([1 2],1,6);
+
+
 %theta is picked arbitrarily, may need to ask apurva
-theta = 1;
+theta = [3,2,1,0.1,0.01];%5 elements
 %fmincon using deterministic model
 deterministic = true;
-chanceconstrained = false;
+markovitz = false;
 [x, fval] = fmincon(@(x) objectiveFunc(x,winProbs,expectations,variances,...
-    bettingPools,TeamPick,theta,deterministic,chanceconstrained),...
+    bettingPools,theta,deterministic,markovitz,numMatches),...
     x0, [],[],[],[],[],[],@(x) constraintFunc(x,budget)) 
 
 %fmincon using chance-constrained model/Markovitz
-chanceconstrained = true;
-deterministic = false;
-[x, fval] = fmincon(@(x) objectiveFunc(x,winProbs,expectations,variances,...
-    bettingPools,TeamPick,theta,deterministic,chanceconstrained),...
-    x0, [],[],[],[],[],[],@(x) constraintFunc(x,budget)) 
+    markovitz = true;
+    deterministic = false;
+
+for i = 1:length(theta)  
+    [x, fval] = fmincon(@(x) objectiveFunc(x,winProbs,expectations,variances,...
+        bettingPools,theta(i),deterministic,markovitz,numMatches),...
+        x0, [],[],[],[],[],[],@(x) constraintFunc(x,budget))
+    fval = -fval
+    fvalmark(i) = fval;
+    theta(i)
+end
