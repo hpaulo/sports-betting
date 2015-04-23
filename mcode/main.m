@@ -11,7 +11,7 @@ close all; clc; clear all;
 
 %% Define parameters
 % Input variables and constraints
-budget = 2000;
+budget = 1000;
 
 % Matches and teams
 numMatches = 6; % number of matches in series
@@ -73,14 +73,12 @@ end
 OFmean = mean(OFout);
 OFvar = var(OFout);
 
-
 %%
 x0 = [0;0;0;0;0;0;0;0;0;0;0;0];
 
-
-
 %theta is picked arbitrarily, may need to ask apurva
 theta = [3,2,1,0.1,0.01];%5 elements
+
 %fmincon using deterministic model
 deterministic = true;
 markovitz = false;
@@ -101,3 +99,42 @@ for i = 1:length(theta)
     theta(i)
 end
 
+%% Testing Markowitz using Monte Carlo simulation 
+M = 1000;
+z = zeros(M,1);
+r = zeros(numMatches,2);
+oldx = round(x);
+x = zeros(6,2);
+
+for i = 1:numMatches
+    x(i,:) = [oldx(2*i-1), oldx(2*i)];
+end
+
+for i = 1:numMatches
+    r(i,:) = [getReturn(1,x(i,:),bettingPools(i,:)), getReturn(2,x(i,:),bettingPools(i,:))];    
+end
+
+for j = 1:M
+    for i = 1:numMatches
+        % Simulate the match's outcome
+        winProbs(i,:) = simulateMatchup( ...
+                            teamStats(teamIndices(i), :), ...
+                            teamStats(teamIndices(numMatches + i), :));
+    end
+    
+    z_sum = 0;
+    for i = 1:numMatches
+        z_sum = z_sum + winProbs(i,:)*r(i,:)';
+    end
+    
+    z(j,1) = z_sum;    
+end
+
+mean(z)
+std(z)
+
+figure()
+hist(z)
+xlabel('Amount of Return')
+ylabel('Frequency')
+title('Monte-Carlo Simulation evaluation of Markowitz optimal betting strategy')
